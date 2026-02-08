@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Valentine 💘</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <!-- React -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <script>
+      const { useState, createElement: h } = React;
+      const { createRoot } = ReactDOM;
+
+      const NO_PHRASES = [
+        "No 💔",
+        "Pretty please? 🥺",
+        "But we'd be so cute together! 💕",
+        "One more chance, pookie?",
+        "Don't break my heart :(",
+        "What about a maybe?",
+        "Please don't do this to me, I'm fragile",
+      ];
+
+      const firstImg =
+        "https://media.tenor.com/VIChDQ6ejRQAAAAj/jumping-bear-hearts-no-png.gif";
+      const secondImg =
+        "https://media.tenor.com/f1xnRxTRxLAAAAAj/bears-with-kisses-bg.gif";
+
+      function App() {
+        const [noClicks, setNoClicks] = useState(0);
+        const [isValentine, setIsValentine] = useState(false);
+        const yesButtonSize = noClicks * 20 + 16;
+
+        return h(
+          "div",
+          {
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "100vh",
+              fontFamily: "Arial, sans-serif",
+              textAlign: "center",
+            },
+          },
+          !isValentine
+            ? [
+                h("img", {
+                  key: "img1",
+                  src: firstImg,
+                  style: { width: "200px", marginBottom: "20px" },
+                }),
+
+                h("h1", { key: "title" }, "Will you be my Valentine? 💘"),
+
+                h(
+                  "div",
+                  { key: "buttons" },
+                  [
+                    h(
+                      "button",
+                      {
+                        key: "yes",
+                        onClick: () => setIsValentine(true),
+                        style: {
