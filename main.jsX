@@ -1,4 +1,4 @@
-const { useState } = React;
+const { useState, createElement: h } = React;
 const { createRoot } = ReactDOM;
 
 const NO_PHRASES = [
@@ -16,40 +16,48 @@ function App() {
   const [isValentine, setIsValentine] = useState(false);
   const yesButtonSize = noClicks * 20 + 16;
 
-  return (
-    <div style={{
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100vh",
-      fontFamily: "Arial",
-      textAlign: "center"
-    }}>
-      {!isValentine ? (
-        <>
-          <h1>Will you be my Valentine? 💘</h1>
-
-          <button
-            onClick={() => setIsValentine(true)}
-            style={{ fontSize: yesButtonSize }}
-          >
-            Yes
-          </button>
-
-          <button onClick={() => setNoClicks(c => c + 1)}>
-            {noClicks === 0
+  return h(
+    "div",
+    {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        fontFamily: "Arial",
+        textAlign: "center",
+      },
+    },
+    !isValentine
+      ? [
+          h("h1", { key: 1 }, "Will you be my Valentine? 💘"),
+          h(
+            "button",
+            {
+              key: 2,
+              onClick: () => setIsValentine(true),
+              style: { fontSize: yesButtonSize, margin: "10px" },
+            },
+            "Yes"
+          ),
+          h(
+            "button",
+            {
+              key: 3,
+              onClick: () => setNoClicks((c) => c + 1),
+            },
+            noClicks === 0
               ? "No"
-              : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]}
-          </button>
-        </>
-      ) : (
-        <h1 style={{ color: "pink", fontSize: 48 }}>
-          Yay!!! 💖🎉
-        </h1>
-      )}
-    </div>
+              : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]
+          ),
+        ]
+      : h(
+          "h1",
+          { style: { color: "pink", fontSize: "48px" } },
+          "Yay!!! 💖🎉"
+        )
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+createRoot(document.getElementById("root")).render(h(App));
