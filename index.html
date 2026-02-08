@@ -69,3 +69,64 @@
                         key: "yes",
                         onClick: () => setIsValentine(true),
                         style: {
+                          fontSize: yesButtonSize + "px",
+                          margin: "10px",
+                          padding: "10px 20px",
+                          backgroundColor: "green",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        },
+                      },
+                      "Yes"
+                    ),
+                    h(
+                      "button",
+                      {
+                        key: "no",
+                        onClick: () => setNoClicks(c => c + 1),
+                        style: {
+                          fontSize: "16px",
+                          margin: "10px",
+                          padding: "10px 20px",
+                          backgroundColor: "red",
+                          color: "white",
+                          border: "none",
+                          borderRadius: "5px",
+                          cursor: "pointer",
+                        },
+                      },
+                      noClicks === 0
+                        ? "No"
+                        : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]
+                    ),
+                  ]
+                ),
+              ]
+            : [
+                h("img", {
+                  key: "img2",
+                  src: secondImg,
+                  style: { width: "200px", marginBottom: "20px" },
+                }),
+                h(
+                  "div",
+                  {
+                    key: "yay",
+                    style: {
+                      fontSize: "48px",
+                      color: "pink",
+                      fontWeight: "bold",
+                    },
+                  },
+                  "Yay!!! 💖🎉"
+                ),
+              ]
+        );
+      }
+
+      createRoot(document.getElementById("root")).render(h(App));
+    </script>
+  </body>
+</html>
