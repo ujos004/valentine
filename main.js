@@ -11,6 +11,11 @@ const NO_PHRASES = [
   "Please don't do this to me, I'm fragile",
 ];
 
+const firstImg =
+  "https://media.tenor.com/VIChDQ6ejRQAAAAj/jumping-bear-hearts-no-png.gif";
+const secondImg =
+  "https://media.tenor.com/f1xnRxTRxLAAAAAj/bears-with-kisses-bg.gif";
+
 function App() {
   const [noClicks, setNoClicks] = useState(0);
   const [isValentine, setIsValentine] = useState(false);
@@ -25,38 +30,86 @@ function App() {
         alignItems: "center",
         justifyContent: "center",
         height: "100vh",
-        fontFamily: "Arial",
+        fontFamily: "Arial, sans-serif",
         textAlign: "center",
       },
     },
     !isValentine
       ? [
-          h("h1", { key: 1 }, "Will you be my Valentine? 💘"),
+          h("img", {
+            key: "img1",
+            src: firstImg,
+            style: { width: "200px", marginBottom: "20px" },
+          }),
+
+          h("h1", { key: "title" }, "Will you be my Valentine? 💘"),
+
           h(
-            "button",
-            {
-              key: 2,
-              onClick: () => setIsValentine(true),
-              style: { fontSize: yesButtonSize, margin: "10px" },
-            },
-            "Yes"
-          ),
-          h(
-            "button",
-            {
-              key: 3,
-              onClick: () => setNoClicks((c) => c + 1),
-            },
-            noClicks === 0
-              ? "No"
-              : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]
+            "div",
+            { key: "buttons" },
+            [
+              h(
+                "button",
+                {
+                  key: "yes",
+                  onClick: () => setIsValentine(true),
+                  style: {
+                    fontSize: `${yesButtonSize}px`,
+                    margin: "10px",
+                    padding: "10px 20px",
+                    backgroundColor: "green",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  },
+                },
+                "Yes"
+              ),
+
+              h(
+                "button",
+                {
+                  key: "no",
+                  onClick: () => setNoClicks((c) => c + 1),
+                  style: {
+                    fontSize: "16px",
+                    margin: "10px",
+                    padding: "10px 20px",
+                    backgroundColor: "red",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "5px",
+                    cursor: "pointer",
+                  },
+                },
+                noClicks === 0
+                  ? "No"
+                  : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]
+              ),
+            ]
           ),
         ]
-      : h(
-          "h1",
-          { style: { color: "pink", fontSize: "48px" } },
-          "Yay!!! 💖🎉"
-        )
+      : [
+          h("img", {
+            key: "img2",
+            src: secondImg,
+            style: { width: "200px", marginBottom: "20px" },
+          }),
+
+          h(
+            "div",
+            {
+              key: "yay",
+              style: {
+                fontSize: "48px",
+                color: "pink",
+                fontWeight: "bold",
+              },
+            },
+            "Yay!!! 💖🎉"
+          ),
+        ]
   );
 }
 
